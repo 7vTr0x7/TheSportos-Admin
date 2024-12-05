@@ -15,6 +15,11 @@ const SignIn: React.FC = () => {
 
     const toastId = toast.loading('Signing in...');
 
+    if (!email || !password) {
+    toast.error('Please fill the required details');
+    return;
+  }
+
     try {
       await handleSignIn(email, password, navigate, setError);
       toast.dismiss(toastId);
@@ -28,6 +33,11 @@ const SignIn: React.FC = () => {
   };
 
   const onForgotPassword = async () => {
+    if (!email) {
+    toast.error('Please fill email field');
+    return;
+  }
+
     const toastId = toast.loading('Sending password reset email...');
 
     try {
