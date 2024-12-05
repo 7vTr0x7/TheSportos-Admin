@@ -5,11 +5,13 @@ import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import { confirmPasswordReset } from 'firebase/auth';
 import { auth } from '../../firebase/firebase-config';
 
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+
 const ResetPassword: React.FC = () => {
-    const [password, setPassword] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
- 
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -19,7 +21,6 @@ const ResetPassword: React.FC = () => {
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
   const toggleConfirmPasswordVisibility = () =>
     setShowConfirmPassword((prev) => !prev);
-
 
   const searchParams = new URLSearchParams(location.search);
   const actionCode: string = searchParams.get('oobCode') as string;
