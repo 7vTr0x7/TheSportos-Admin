@@ -74,7 +74,7 @@ export const handleLogout = async (
   try {
     await signOut(auth);
     localStorage.removeItem('authToken');
-    navigate('/login');
+    navigate('/auth/signin');
   } catch (err) {
     const message = getErrorMessage(err);
     throw new Error(message);

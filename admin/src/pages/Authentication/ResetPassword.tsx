@@ -25,33 +25,44 @@ const ResetPassword: React.FC = () => {
   const searchParams = new URLSearchParams(location.search);
   const actionCode: string = searchParams.get('oobCode') as string;
 
- 
-const handleResetPassword = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  if (!password || !confirmPassword) {
-    setError('Please fill in both password fields');
-    return;
-  }
+    if (password.length < 7) {
+      toast.error('Password should be more than 6 characters');
+      return;
+    }
+    if (!password || !confirmPassword) {
+      setError('Please fill in both password fields');
+      toast.error('Please fill in both password fields');
+      return;
+    }
 
-  if (password !== confirmPassword) {
-    setError('Passwords do not match');
-    return;
-  }
+    if (!password || !confirmPassword) {
+      setError('Please fill in both password fields');
+      toast.error('Please fill in both password fields');
+      return;
+    }
 
-  const loadingToast = toast.loading('Resetting password...'); // Show loading toast
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      toast.error('Passwords do not match');
+      return;
+    }
 
-  try {
-    await confirmPasswordReset(auth, actionCode, password);
-    toast.success('Password reset successfully!');
-    navigate('/auth/signin');
-  } catch (err) {
-    toast.error('Failed to reset password. Please try again.');
-    console.error(err);
-  } finally {
-    toast.dismiss(loadingToast); // Dismiss loading toast when done
-  }
-};
+    const loadingToast = toast.loading('Resetting password...'); // Show loading toast
+
+    try {
+      await confirmPasswordReset(auth, actionCode, password);
+      toast.success('Password reset successfully!');
+      navigate('/auth/signin');
+    } catch (err) {
+      toast.error('Failed to reset password. Please try again.');
+      console.error(err);
+    } finally {
+      toast.dismiss(loadingToast); // Dismiss loading toast when done
+    }
+  };
 
   return (
     <>
