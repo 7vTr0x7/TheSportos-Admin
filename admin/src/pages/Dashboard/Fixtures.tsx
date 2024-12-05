@@ -3,7 +3,8 @@ import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import LiveFixtures from '../Fixtures/LiveFixtures';
 import ScheduledFixtures from '../Fixtures/ScheduledFixtures';
 import CompletedFixtures from '../Fixtures/CompletedFixtures';
-import AddFixture from '../Fixtures/AddFixture';
+import AddFixture from '../../components/Fixtures/AddFixture';
+import { Toaster } from 'react-hot-toast';
 
 const Fixtures: React.FC = () => {
   const [activeTab, setActiveTab] = useState<String>('live');
@@ -40,6 +41,7 @@ const Fixtures: React.FC = () => {
         {activeTab === 'scheduled' && <ScheduledFixtures />}
         {activeTab === 'completed' && <CompletedFixtures />}
       </div>
+      <Toaster />
     </>
   );
 };

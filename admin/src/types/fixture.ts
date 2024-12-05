@@ -27,7 +27,7 @@ interface Player {
 
 // Match Schema
 interface Match {
-  _id: string;
+  _id?: string;
   competition: string;
   league_logo_url?: string;
   date: string; // ISO string format
@@ -83,7 +83,7 @@ interface Match {
       score: number;
     };
   };
-  goals: {
+  goals?: {
     team1: Goal[];
     team2: Goal[];
   };

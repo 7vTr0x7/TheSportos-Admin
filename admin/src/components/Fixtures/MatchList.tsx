@@ -9,7 +9,10 @@ const MatchList: React.FC<Matches> = ({ matches }) => {
     <div>
       {matches?.length > 0 ? (
         matches.map((match: Match) => (
-          <div className="flex items-center justify-between rounded-md bg-gray-200 px-5 py-2">
+          <div
+            key={match._id}
+            className="flex items-center justify-between rounded-md bg-gray-200 px-5 py-2"
+          >
             <div className="flex items-center gap-5 ">
               <div>{match.team1.name}</div>
               <p>vs</p>
