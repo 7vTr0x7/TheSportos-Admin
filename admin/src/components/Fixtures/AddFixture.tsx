@@ -26,7 +26,7 @@ const AddFixture: React.FC = () => {
           onClick={closeForm}
         >
           <div
-            className="bg-white w-full max-w-lg mx-auto p-6 rounded-lg shadow-lg"
+            className="bg-white w-full max-w-lg mx-auto p-4 rounded-lg shadow-lg"
             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the form
           >
             <FixturesForm closeForm={closeForm} />

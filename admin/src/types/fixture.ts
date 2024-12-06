@@ -31,7 +31,6 @@ interface Match {
   competition: string;
   league_logo_url?: string;
   date: string; // ISO string format
-  month: string;
   stadium: string;
   team1: {
     name: string;
@@ -41,7 +40,7 @@ interface Match {
     name: string;
     logo_url?: string;
   };
-  status: string;
+  status: 'Live' | 'Completed' | 'Upcoming';
   time?: string;
   FT: boolean;
   score: {
