@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import MatchList from '../../components/Fixtures/MatchList';
-import { fetchMatches } from '../../apis/admin';
+import { useMatchContext } from '../../components/MatchProvider';
 
 const CompletedFixtures: React.FC = () => {
-  const [completedMatches, setCompletedMatches] = useState<Match[]>([]);
+  const { completedMatches, refreshMatches } = useMatchContext();
 
   useEffect(() => {
-    fetchMatches(setCompletedMatches, 'Completed');
-  }, []);
+    refreshMatches();
+  }, [refreshMatches]);
 
   return (
     <div>

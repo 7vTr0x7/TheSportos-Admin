@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import MatchList from '../../components/Fixtures/MatchList';
-import { fetchMatches } from '../../apis/admin';
+import { useMatchContext } from '../../components/MatchProvider';
 
 const ScheduledFixtures: React.FC = () => {
-  const [scheduledMatches, setScheduledMatches] = useState<Match[]>([]);
+  const { scheduledMatches, refreshMatches } = useMatchContext();
 
   useEffect(() => {
-    fetchMatches(setScheduledMatches, 'Upcoming');
-  }, []);
+    refreshMatches(); // Ensure data is loaded on mount
+  }, [refreshMatches]);
 
   return (
     <div>

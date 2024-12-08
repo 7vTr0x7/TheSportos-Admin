@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { FaRegImage } from 'react-icons/fa';
-import TeamLineupFieldset from './TeamLineupFieldset';
+import { addMatch, updateMatch } from '../../apis/admin';
+import { useMatchContext } from '../MatchProvider';
 import GoalsFieldset from './GoalsFieldset';
-import { addMatch } from '../../apis/admin';
+import TeamLineupFieldset from './TeamLineupFieldset';
+import { FeaturedPlayer, Match } from '../../types/fixture';
 
 type NestedKeys =
   | 'team1.logo_url'
@@ -14,9 +16,15 @@ type ValidKeys = NestedKeys | TopLevelKeys;
 
 interface FixturesFormProps {
   closeForm: () => void;
+  isEdit?: boolean;
+  match?: Match;
 }
 
-const FixturesForm: React.FC<FixturesFormProps> = ({ closeForm }) => {
+const FixturesForm: React.FC<FixturesFormProps> = ({
+  closeForm,
+  isEdit,
+  match,
+}) => {
   const [formState, setFormState] = useState<Match>({
     competition: '',
     league_logo_url: 'https://placehold.co/100',
@@ -42,12 +50,12 @@ const FixturesForm: React.FC<FixturesFormProps> = ({ closeForm }) => {
       awayWins: { team1: 0, team2: 0 },
     },
     previousResult: {
-      team1: { name: '', score: 0 },
-      team2: { name: '', score: 0 },
+      team1: { score: 0 },
+      team2: { score: 0 },
     },
     teamLineup: {
-      team1: { name: '', lineup: [] },
-      team2: { name: '', lineup: [] },
+      team1: { lineup: [] },
+      team2: { lineup: [] },
     },
     goals: { team1: [], team2: [] },
     bestDefender: '',
@@ -64,6 +72,14 @@ const FixturesForm: React.FC<FixturesFormProps> = ({ closeForm }) => {
       position: '',
     },
   });
+
+  useEffect(() => {
+    if (isEdit && match) {
+      setFormState(match);
+    }
+  }, [isEdit, match]);
+
+  const { refreshMatches } = useMatchContext();
 
   const handleFileChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -132,39 +148,50 @@ const FixturesForm: React.FC<FixturesFormProps> = ({ closeForm }) => {
 
     setFormState((prevState) => {
       if (name.includes('.')) {
-        const [parentKey, childKey] = name.split('.');
+        const [parentKey, childKey, subKey] = name.split('.');
 
-        return {
-          ...prevState,
-          [parentKey]: {
-            ...(prevState[parentKey] as object),
-            [childKey]:
-              type === 'checkbox'
-                ? (event.target as HTMLInputElement).checked
-                : value,
-          },
-        };
-      } else {
-        // Handle the case for nested fields like 'timeLeft'
-        if (name === 'daysLeft' || name === 'hoursLeft') {
+        if (subKey) {
+          // Three-level nesting
           return {
             ...prevState,
-            timeLeft: {
-              ...prevState.timeLeft,
-              [name]:
+            [parentKey]: {
+              ...(prevState[parentKey] as object),
+              [childKey]: {
+                ...(prevState[parentKey][childKey] as object),
+                [subKey]:
+                  type === 'checkbox'
+                    ? (event.target as HTMLInputElement).checked
+                    : value,
+              },
+            },
+          };
+        } else {
+          // Two-level nesting
+          return {
+            ...prevState,
+            [parentKey]: {
+              ...(prevState[parentKey] as object),
+              [childKey]:
                 type === 'checkbox'
                   ? (event.target as HTMLInputElement).checked
                   : value,
             },
           };
         }
-
+      } else if (name === 'daysLeft' || name === 'hoursLeft') {
+        // Handle `timeLeft` updates
         return {
           ...prevState,
-          [name]:
-            type === 'checkbox'
-              ? (event.target as HTMLInputElement).checked
-              : value,
+          timeLeft: {
+            ...prevState.timeLeft,
+            [name]: value,
+          },
+        };
+      } else {
+        // Single-level updates
+        return {
+          ...prevState,
+          [name]: value,
         };
       }
     });
@@ -299,42 +326,64 @@ const FixturesForm: React.FC<FixturesFormProps> = ({ closeForm }) => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    // // Check that required fields (except optional ones) are filled
-    // if (
-    //   formState?.competition &&
-    //   formState?.date &&
-    //   formState?.stadium &&
-    //   formState?.team1?.name &&
-    //   formState?.team2?.name &&
-    //   formState?.status &&
-    //   formState?.matchType &&
-    //   formState?.teamLineup?.team1?.lineup.length> 0 &&
-    //   formState?.teamLineup?.team2?.lineup.length> 0 &&
-    //   formState?.previousResult?.team1?.score && // Check for previousResult.team1
-    //   formState?.previousResult?.team2?.score // Check for previousResult.team2
-    // ) {
-    //   // Show loading toast
-    //   const loadingToast = toast.loading('Submitting match data...');
+    if (
+      formState?.competition &&
+      formState?.date &&
+      formState?.stadium &&
+      formState?.team1?.name &&
+      formState?.team2?.name &&
+      formState?.status &&
+      formState?.matchType &&
+      formState?.teamLineup?.team1?.lineup.length > 0 &&
+      formState?.teamLineup?.team2?.lineup.length > 0
+    ) {
+      // Show loading toast
+      const loadingToast = toast.loading('Submitting match data...');
 
-    //   try {
-    //     await addMatch(formState);
-    //     closeForm();
-    //     toast.success('Match data submitted successfully!', {
-    //       id: loadingToast,
-    //     });
-    //   } catch (error) {
-    //     toast.error('Error submitting match data.', { id: loadingToast });
-    //   }
-    // } else {
-    //   alert('Please fill all the required fields.');
-    // }
-    console.log(formState);
+      try {
+        console.log(formState);
+        await addMatch(formState);
+        refreshMatches(); // Refresh data for all components
+
+        closeForm();
+        toast.success('Match data submitted successfully!', {
+          id: loadingToast,
+        });
+      } catch (error) {
+        toast.error('Error submitting match data.', { id: loadingToast });
+      }
+    } else {
+      alert('Please fill all the required fields.');
+    }
+  };
+
+  const handleUpdate = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (formState && isEdit && match) {
+      // Show loading toast
+      const loadingToast = toast.loading('Submitting match data...');
+
+      try {
+        await updateMatch(match._id, formState);
+        refreshMatches();
+
+        closeForm();
+        toast.success('Match data updated successfully!', {
+          id: loadingToast,
+        });
+      } catch (error) {
+        toast.error('Error updating match data.', { id: loadingToast });
+      }
+    } else {
+      alert('Please fill all the required fields.');
+    }
   };
 
   return (
     <div>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={!isEdit ? handleSubmit : handleUpdate}
         className="overflow-y-auto h-[70vh] p-4 bg-white rounded-lg shadow-lg w-[100%]"
       >
         <h2 className="text-xl font-semibold mb-4 text-gray-800">
@@ -887,12 +936,21 @@ const FixturesForm: React.FC<FixturesFormProps> = ({ closeForm }) => {
         </div>
 
         {/* Submit and Cancel Buttons */}
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 mt-4"
-        >
-          Submit
-        </button>
+        {!isEdit ? (
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 mt-4"
+          >
+            Submit
+          </button>
+        ) : (
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 mt-4"
+          >
+            Update
+          </button>
+        )}
         <button
           type="button"
           onClick={closeForm}

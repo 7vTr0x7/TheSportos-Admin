@@ -240,6 +240,50 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                           </li>
                           <li>
                             <NavLink
+                              to="/banner"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                            >
+                              Banner
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink
+                              to="/sponsor"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                            >
+                              Sponsor
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink
+                              to="/trophies"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                            >
+                              Trophies
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink
+                              to="/featured-player"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                            >
+                              Featured Player
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink
                               to="/get-in-touch"
                               className={({ isActive }) =>
                                 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +

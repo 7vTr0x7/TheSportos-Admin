@@ -13,6 +13,12 @@ import GetInTouch from './pages/Dashboard/GetInTouch';
 import Leagues from './pages/Dashboard/Leagues';
 import News from './pages/Dashboard/News';
 import Players from './pages/Dashboard/Players';
+import { MatchProvider } from './components/MatchProvider';
+import Banner from './pages/Dashboard/Banner';
+import Sponsor from './pages/Dashboard/Sponsor';
+import Trophies from './pages/Dashboard/Trophies';
+import FeaturedPlayer from './pages/Dashboard/FeaturedPlayer';
+
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const { pathname } = useLocation();
@@ -30,90 +36,128 @@ function App() {
   }
 
   return (
-    <DefaultLayout>
-      <Routes>
-        <Route
-          element={
-            <>
-              <ProtectedRoutes />
-            </>
-          }
-        >
+    <MatchProvider>
+      <DefaultLayout>
+        <Routes>
           <Route
-            index
             element={
               <>
-                <PageTitle title="Fixtures" />
-                <Fixtures />
+                <ProtectedRoutes />
+              </>
+            }
+          >
+            <Route
+              index
+              element={
+                <>
+                  <PageTitle title="Fixtures" />
+                  <Fixtures />
+                </>
+              }
+            />
+            <Route
+              path="/banner"
+              element={
+                <>
+                  <PageTitle title="Banner" />
+                  <Banner />
+                </>
+              }
+            />
+            <Route
+              path="/sponsor"
+              element={
+                <>
+                  <PageTitle title="Sponsor" />
+                  <Sponsor />
+                </>
+              }
+            />
+            <Route
+              path="/trophies"
+              element={
+                <>
+                  <PageTitle title="Trophies" />
+                  <Trophies />
+                </>
+              }
+            />
+            <Route
+              path="/featured-player"
+              element={
+                <>
+                  <PageTitle title="Featured Player" />
+                  <FeaturedPlayer />
+                </>
+              }
+            />
+            <Route
+              path="/players"
+              element={
+                <>
+                  <PageTitle title="Players" />
+                  <Players />
+                </>
+              }
+            />
+            <Route
+              path="/news"
+              element={
+                <>
+                  <PageTitle title="News" />
+                  <News />
+                </>
+              }
+            />
+            <Route
+              path="/leagues"
+              element={
+                <>
+                  <PageTitle title="Leagues" />
+                  <Leagues />
+                </>
+              }
+            />
+            <Route
+              path="/get-in-touch"
+              element={
+                <>
+                  <PageTitle title="Get In Touch" />
+                  <GetInTouch />
+                </>
+              }
+            />
+          </Route>
+          <Route
+            path="/reset-password"
+            element={
+              <>
+                <PageTitle title="Reset Password" />
+                <ResetPassword />
               </>
             }
           />
           <Route
-            path="/players"
+            path="/auth/signin"
             element={
               <>
-                <PageTitle title="Players" />
-                <Players />
+                <PageTitle title="Signin | Admin Dashboard" />
+                <SignIn />
               </>
             }
           />
           <Route
-            path="/news"
+            path="/auth/signup"
             element={
               <>
-                <PageTitle title="News" />
-                <News />
+                <PageTitle title="Signup | Admin Dashboard" />
+                <SignUp />
               </>
             }
           />
-          <Route
-            path="/leagues"
-            element={
-              <>
-                <PageTitle title="Leagues" />
-                <Leagues />
-              </>
-            }
-          />
-          <Route
-            path="/get-in-touch"
-            element={
-              <>
-                <PageTitle title="Get In Touch" />
-                <GetInTouch />
-              </>
-            }
-          />
-        </Route>
-        <Route
-          path="/reset-password"
-          element={
-            <>
-              <PageTitle title="Reset Password" />
-              <ResetPassword />
-            </>
-          }
-        />
-        <Route
-          path="/auth/signin"
-          element={
-            <>
-              <PageTitle title="Signin | Admin Dashboard" />
-              <SignIn />
-            </>
-          }
-        />
-        <Route
-          path="/auth/signup"
-          element={
-            <>
-              <PageTitle title="Signup | Admin Dashboard" />
-              <SignUp />
-            </>
-          }
-        />
-      </Routes>
-    </DefaultLayout>
+        </Routes>
+      </DefaultLayout>
+    </MatchProvider>
   );
 }
 

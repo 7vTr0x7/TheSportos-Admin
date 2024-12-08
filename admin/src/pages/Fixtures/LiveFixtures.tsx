@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import MatchList from '../../components/Fixtures/MatchList';
-import { fetchMatches } from '../../apis/admin';
+import { useMatchContext } from '../../components/MatchProvider';
 
 const LiveFixtures: React.FC = () => {
-  const [liveMatches, setLiveMatches] = useState<Match[]>([]);
+  const { liveMatches, refreshMatches } = useMatchContext();
 
   useEffect(() => {
-    fetchMatches(setLiveMatches, 'Live');
-  }, []);
-
+    refreshMatches();
+  }, [refreshMatches]);
   return (
     <div>
       <MatchList matches={liveMatches} />

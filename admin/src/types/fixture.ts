@@ -5,7 +5,8 @@ interface Goal {
 }
 
 // Featured Player Schema
-interface FeaturedPlayer {
+export interface FeaturedPlayer {
+  _id?: string;
   name: string;
   imageUrl: string;
   club: string;
@@ -26,7 +27,7 @@ interface Player {
 }
 
 // Match Schema
-interface Match {
+export interface Match {
   _id?: string;
   competition: string;
   league_logo_url?: string;
@@ -74,11 +75,9 @@ interface Match {
   };
   previousResult: {
     team1: {
-      name: string;
       score: number;
     };
     team2: {
-      name: string;
       score: number;
     };
   };
@@ -91,17 +90,15 @@ interface Match {
   featuredPlayer?: FeaturedPlayer;
   teamLineup: {
     team1: {
-      name: string;
       lineup: Player[];
     };
     team2: {
-      name: string;
       lineup: Player[];
     };
   };
 }
 
-interface MatchesResponse {
+export interface MatchesResponse {
   success: boolean;
   matches: Match[];
 }
