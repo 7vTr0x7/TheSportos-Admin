@@ -3,7 +3,6 @@ import { FeaturedPlayer, Match, MatchesResponse } from '../types/fixture';
 import { PlayerResponse, SinglePlayer } from '../types/player';
 import { Sponsor, SponsorResponse } from '../types/sponsor';
 import { Trophy, TrophyResponse } from '../types/trophy';
-import Leagues from '../pages/Dashboard/Leagues';
 import { ILeague } from '../types/league';
 
 export const fetchMatches = async (
@@ -11,12 +10,15 @@ export const fetchMatches = async (
   status: string,
 ): Promise<void> => {
   try {
-    const response = await fetch('https://the-sportos-v1.vercel.app/api/user/matches', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://the-sportos-v1.vercel.app/api/user/matches',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -38,13 +40,16 @@ export const fetchMatches = async (
 
 export const addMatch = async (match: Match): Promise<void> => {
   try {
-    const response = await fetch('https://the-sportos-v1.vercel.app/api/admin/add/match', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://the-sportos-v1.vercel.app/api/admin/add/match',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(match),
       },
-      body: JSON.stringify(match),
-    });
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -126,9 +131,12 @@ export const fetchPlayers = async (
   setPlayers: React.Dispatch<React.SetStateAction<SinglePlayer[]>>,
 ): Promise<void> => {
   try {
-    const response = await fetch('https://the-sportos-v1.vercel.app/api/user/players', {
-      method: 'GET',
-    });
+    const response = await fetch(
+      'https://the-sportos-v1.vercel.app/api/user/players',
+      {
+        method: 'GET',
+      },
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -150,13 +158,16 @@ export const fetchPlayers = async (
 
 export const addPlayer = async (player: SinglePlayer): Promise<void> => {
   try {
-    const response = await fetch('https://the-sportos-v1.vercel.app/api/admin/add/player', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://the-sportos-v1.vercel.app/api/admin/add/player',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(player),
       },
-      body: JSON.stringify(player),
-    });
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -241,9 +252,12 @@ export const fetchBanner = async (
   setBanner: React.Dispatch<React.SetStateAction<Banner[]>>,
 ): Promise<void> => {
   try {
-    const response = await fetch('https://the-sportos-v1.vercel.app/api/user/banner', {
-      method: 'GET',
-    });
+    const response = await fetch(
+      'https://the-sportos-v1.vercel.app/api/user/banner',
+      {
+        method: 'GET',
+      },
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -265,13 +279,16 @@ export const fetchBanner = async (
 
 export const addBanner = async (banner: Banner): Promise<void> => {
   try {
-    const response = await fetch('https://the-sportos-v1.vercel.app/api/admin/add/banner', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://the-sportos-v1.vercel.app/api/admin/add/banner',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(banner),
       },
-      body: JSON.stringify(banner),
-    });
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -357,9 +374,12 @@ export const fetchSponsor = async (
   setSponsor: React.Dispatch<React.SetStateAction<Sponsor[]>>,
 ): Promise<void> => {
   try {
-    const response = await fetch('https://the-sportos-v1.vercel.app/api/user/sponsor', {
-      method: 'GET',
-    });
+    const response = await fetch(
+      'https://the-sportos-v1.vercel.app/api/user/sponsor',
+      {
+        method: 'GET',
+      },
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -476,9 +496,12 @@ export const fetchTrophies = async (
   setTrophies: React.Dispatch<React.SetStateAction<Trophy[]>>,
 ): Promise<void> => {
   try {
-    const response = await fetch('https://the-sportos-v1.vercel.app/api/user/trophies', {
-      method: 'GET',
-    });
+    const response = await fetch(
+      'https://the-sportos-v1.vercel.app/api/user/trophies',
+      {
+        method: 'GET',
+      },
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -500,13 +523,16 @@ export const fetchTrophies = async (
 
 export const addTrophy = async (trophy: Trophy): Promise<void> => {
   try {
-    const response = await fetch('https://the-sportos-v1.vercel.app/api/admin/add/trophy', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://the-sportos-v1.vercel.app/api/admin/add/trophy',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(trophy),
       },
-      body: JSON.stringify(trophy),
-    });
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -715,9 +741,12 @@ export const fetchLeague = async (
   setLeagues: React.Dispatch<React.SetStateAction<ILeague[]>>,
 ): Promise<void> => {
   try {
-    const response = await fetch('https://the-sportos-v1.vercel.app/api/user/leagues', {
-      method: 'GET',
-    });
+    const response = await fetch(
+      'https://the-sportos-v1.vercel.app/api/user/leagues',
+      {
+        method: 'GET',
+      },
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -739,13 +768,16 @@ export const fetchLeague = async (
 
 export const addLeague = async (league: ILeague): Promise<void> => {
   try {
-    const response = await fetch('https://the-sportos-v1.vercel.app/api/admin/add/league', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://the-sportos-v1.vercel.app/api/admin/add/league',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(league),
       },
-      body: JSON.stringify(league),
-    });
+    );
 
     if (!response.ok) {
       throw new Error(
