@@ -3,6 +3,7 @@ import { FeaturedPlayer, Match, MatchesResponse } from '../types/fixture';
 import { PlayerResponse, SinglePlayer } from '../types/player';
 import { Sponsor, SponsorResponse } from '../types/sponsor';
 import { Trophy, TrophyResponse } from '../types/trophy';
+import Leagues from '../pages/Dashboard/Leagues';
 import { ILeague } from '../types/league';
 
 export const fetchMatches = async (
