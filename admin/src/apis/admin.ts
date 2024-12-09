@@ -11,7 +11,7 @@ export const fetchMatches = async (
   status: string,
 ): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/user/matches', {
+    const response = await fetch('https://the-sportos-v1.vercel.app/api/user/matches', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export const fetchMatches = async (
 
 export const addMatch = async (match: Match): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/admin/add/match', {
+    const response = await fetch('https://the-sportos-v1.vercel.app/api/admin/add/match', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ export const addMatch = async (match: Match): Promise<void> => {
 export const deleteMatch = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/match/${id}`,
+      `https://the-sportos-v1.vercel.app/api/admin/delete/match/${id}`,
       {
         method: 'DELETE',
       },
@@ -94,7 +94,7 @@ export const deleteMatch = async (id: string): Promise<void> => {
 export const updateMatch = async (id: string, match: Match): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/update/match/${id}`,
+      `https://the-sportos-v1.vercel.app/api/admin/update/match/${id}`,
       {
         method: 'PUT',
         headers: {
@@ -126,7 +126,7 @@ export const fetchPlayers = async (
   setPlayers: React.Dispatch<React.SetStateAction<SinglePlayer[]>>,
 ): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/user/players', {
+    const response = await fetch('https://the-sportos-v1.vercel.app/api/user/players', {
       method: 'GET',
     });
 
@@ -150,7 +150,7 @@ export const fetchPlayers = async (
 
 export const addPlayer = async (player: SinglePlayer): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/admin/add/player', {
+    const response = await fetch('https://the-sportos-v1.vercel.app/api/admin/add/player', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -182,7 +182,7 @@ export const updatePlayer = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/update/player/${id}`,
+      `https://the-sportos-v1.vercel.app/api/admin/update/player/${id}`,
       {
         method: 'PUT',
         headers: {
@@ -213,7 +213,7 @@ export const updatePlayer = async (
 export const deletePlayer = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/player/${id}`,
+      `https://the-sportos-v1.vercel.app/api/admin/delete/player/${id}`,
       {
         method: 'DELETE',
       },
@@ -241,7 +241,7 @@ export const fetchBanner = async (
   setBanner: React.Dispatch<React.SetStateAction<Banner[]>>,
 ): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/user/banner', {
+    const response = await fetch('https://the-sportos-v1.vercel.app/api/user/banner', {
       method: 'GET',
     });
 
@@ -265,7 +265,7 @@ export const fetchBanner = async (
 
 export const addBanner = async (banner: Banner): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/admin/add/banner', {
+    const response = await fetch('https://the-sportos-v1.vercel.app/api/admin/add/banner', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -297,7 +297,7 @@ export const updateBanner = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/update/banner/${id}`,
+      `https://the-sportos-v1.vercel.app/api/admin/update/banner/${id}`,
       {
         method: 'PUT',
         headers: {
@@ -328,7 +328,7 @@ export const updateBanner = async (
 export const deleteBanner = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/banner/${id}`,
+      `https://the-sportos-v1.vercel.app/api/admin/delete/banner/${id}`,
       {
         method: 'DELETE',
       },
@@ -357,7 +357,7 @@ export const fetchSponsor = async (
   setSponsor: React.Dispatch<React.SetStateAction<Sponsor[]>>,
 ): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/user/sponsor', {
+    const response = await fetch('https://the-sportos-v1.vercel.app/api/user/sponsor', {
       method: 'GET',
     });
 
@@ -382,7 +382,7 @@ export const fetchSponsor = async (
 export const addSponsor = async (sponsor: Sponsor): Promise<void> => {
   try {
     const response = await fetch(
-      'http://localhost:4000/api/admin/add/sponsor',
+      'https://the-sportos-v1.vercel.app/api/admin/add/sponsor',
       {
         method: 'POST',
         headers: {
@@ -416,7 +416,7 @@ export const updateSponsor = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/update/sponsor/${id}`,
+      `https://the-sportos-v1.vercel.app/api/admin/update/sponsor/${id}`,
       {
         method: 'PUT',
         headers: {
@@ -447,7 +447,7 @@ export const updateSponsor = async (
 export const deleteSponsor = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/sponsor/${id}`,
+      `https://the-sportos-v1.vercel.app/api/admin/delete/sponsor/${id}`,
       {
         method: 'DELETE',
       },
@@ -476,7 +476,7 @@ export const fetchTrophies = async (
   setTrophies: React.Dispatch<React.SetStateAction<Trophy[]>>,
 ): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/user/trophies', {
+    const response = await fetch('https://the-sportos-v1.vercel.app/api/user/trophies', {
       method: 'GET',
     });
 
@@ -500,7 +500,7 @@ export const fetchTrophies = async (
 
 export const addTrophy = async (trophy: Trophy): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/admin/add/trophy', {
+    const response = await fetch('https://the-sportos-v1.vercel.app/api/admin/add/trophy', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -532,7 +532,7 @@ export const updateTrophy = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/update/trophy/${id}`,
+      `https://the-sportos-v1.vercel.app/api/admin/update/trophy/${id}`,
       {
         method: 'PUT',
         headers: {
@@ -563,7 +563,7 @@ export const updateTrophy = async (
 export const deleteTrophy = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/trophy/${id}`,
+      `https://the-sportos-v1.vercel.app/api/admin/delete/trophy/${id}`,
       {
         method: 'DELETE',
       },
@@ -593,7 +593,7 @@ export const fetchFeaturedPlayer = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      'http://localhost:4000/api/user/featured-player',
+      'https://the-sportos-v1.vercel.app/api/user/featured-player',
       {
         method: 'GET',
       },
@@ -622,7 +622,7 @@ export const addFeaturedPlayer = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      'http://localhost:4000/api/admin/add/featured-player',
+      'https://the-sportos-v1.vercel.app/api/admin/add/featured-player',
       {
         method: 'POST',
         headers: {
@@ -656,7 +656,7 @@ export const updateFeaturedPlayer = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/update/featured-player/${id}`,
+      `https://the-sportos-v1.vercel.app/api/admin/update/featured-player/${id}`,
       {
         method: 'PUT',
         headers: {
@@ -687,7 +687,7 @@ export const updateFeaturedPlayer = async (
 export const deleteFeaturedPlayer = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/featured-player/${id}`,
+      `https://the-sportos-v1.vercel.app/api/admin/delete/featured-player/${id}`,
       {
         method: 'DELETE',
       },
@@ -715,7 +715,7 @@ export const fetchLeague = async (
   setLeagues: React.Dispatch<React.SetStateAction<ILeague[]>>,
 ): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/user/leagues', {
+    const response = await fetch('https://the-sportos-v1.vercel.app/api/user/leagues', {
       method: 'GET',
     });
 
@@ -739,7 +739,7 @@ export const fetchLeague = async (
 
 export const addLeague = async (league: ILeague): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/admin/add/league', {
+    const response = await fetch('https://the-sportos-v1.vercel.app/api/admin/add/league', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -771,7 +771,7 @@ export const updateLeague = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/update/league/${id}`,
+      `https://the-sportos-v1.vercel.app/api/admin/update/league/${id}`,
       {
         method: 'PUT',
         headers: {
@@ -802,7 +802,7 @@ export const updateLeague = async (
 export const deleteLeague = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/league/${id}`,
+      `https://the-sportos-v1.vercel.app/api/admin/delete/league/${id}`,
       {
         method: 'DELETE',
       },
