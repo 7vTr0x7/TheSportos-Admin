@@ -21,7 +21,6 @@ const PlayerForm: React.FC<PlayerFormProps> = ({
     imageUrl: '',
     number: 0,
     country: '',
-    email: '',
     position: '',
     playerProfile: {
       dateOfBirth: new Date(),
@@ -33,7 +32,6 @@ const PlayerForm: React.FC<PlayerFormProps> = ({
     recentFixtures: [],
   });
 
-  console.log(player);
   const { refreshPlayers } = useMatchContext();
 
   useEffect(() => {
@@ -204,7 +202,6 @@ const PlayerForm: React.FC<PlayerFormProps> = ({
       imageUrl,
       number,
       country,
-      email,
       position,
       playerProfile,
     } = player;
@@ -433,18 +430,7 @@ const PlayerForm: React.FC<PlayerFormProps> = ({
             onChange={(e) => handleChange('country', e.target.value)}
           />
         </div>
-        <div>
-          <label className="block text-sm font-medium mb-1" id="email">
-            Email:
-          </label>
-          <input
-            type="email"
-            id="email"
-            className="w-full border rounded-lg p-2"
-            value={player.email}
-            onChange={(e) => handleChange('email', e.target.value)}
-          />
-        </div>
+
         <div>
           <label className="block text-sm font-medium mb-1">Position:</label>
           <select

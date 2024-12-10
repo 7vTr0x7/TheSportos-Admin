@@ -41,7 +41,6 @@ export interface SinglePlayer {
   imageUrl: string;
   number: number;
   country: string;
-  email: string;
   position: string;
   playerProfile: PlayerProfile;
   teamsPlayedFor: TeamStats[];
