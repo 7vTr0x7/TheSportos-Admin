@@ -8,7 +8,7 @@ const FeaturedPlayer: React.FC = () => {
     <>
       <Breadcrumb pageName="FeaturedPlayer" />
 
-      <AddFeaturedPlayer />
+      {/* <AddFeaturedPlayer /> */}
 
       <FeaturedPlayersList />
     </>

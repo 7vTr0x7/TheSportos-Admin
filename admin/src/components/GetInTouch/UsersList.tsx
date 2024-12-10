@@ -7,7 +7,7 @@ import { IUser } from '../../types/user';
 const UsersList: React.FC = () => {
   const [user, setUser] = useState<IUser[]>([]);
 
-  const apiUrl = 'https://the-sportos-v1.vercel.app';
+  const apiUrl = 'https://thesportos-v1.onrender.com';
 
   const fetchUsers = async (): Promise<void> => {
     try {

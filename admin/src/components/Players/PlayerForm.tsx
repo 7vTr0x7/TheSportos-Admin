@@ -153,7 +153,6 @@ const PlayerForm: React.FC<PlayerFormProps> = ({
       imageUrl,
       number,
       country,
-      email,
       position,
       playerProfile,
     } = player;
@@ -167,7 +166,6 @@ const PlayerForm: React.FC<PlayerFormProps> = ({
       !imageUrl ||
       !number ||
       !country ||
-      !email ||
       !position ||
       !dateOfBirth ||
       !preferredFoot ||
@@ -215,7 +213,6 @@ const PlayerForm: React.FC<PlayerFormProps> = ({
       !imageUrl ||
       !number ||
       !country ||
-      !email ||
       !position ||
       !dateOfBirth ||
       !preferredFoot ||
