@@ -11,16 +11,13 @@ const UsersList: React.FC = () => {
 
   const fetchUsers = async (): Promise<void> => {
     try {
-      const response = await fetch(
-        'https://the-sportos-v1.vercel.app/api/admin/get/all/users',
-        {
-          method: 'GET',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+      const response = await fetch(`${apiUrl}/api/admin/get/all/users`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+      });
 
       if (!response.ok) {
         throw new Error(
