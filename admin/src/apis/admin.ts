@@ -14,13 +14,16 @@ export const fetchMatches = async (
   status: string,
 ): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/user/matches', {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://thesportos-v1.onrender.com/api/user/matches',
+      {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -42,14 +45,17 @@ export const fetchMatches = async (
 
 export const addMatch = async (match: Match): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/admin/add/match', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://thesportos-v1.onrender.com/api/admin/add/match',
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(match),
       },
-      body: JSON.stringify(match),
-    });
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -72,7 +78,7 @@ export const addMatch = async (match: Match): Promise<void> => {
 export const deleteMatch = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/match/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/delete/match/${id}`,
       {
         method: 'DELETE',
         credentials: 'include',
@@ -100,7 +106,7 @@ export const deleteMatch = async (id: string): Promise<void> => {
 export const updateMatch = async (id: string, match: Match): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/update/match/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/update/match/${id}`,
       {
         method: 'PUT',
         credentials: 'include',
@@ -133,10 +139,13 @@ export const fetchPlayers = async (
   setPlayers: React.Dispatch<React.SetStateAction<SinglePlayer[]>>,
 ): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/user/players', {
-      method: 'GET',
-      credentials: 'include',
-    });
+    const response = await fetch(
+      'https://thesportos-v1.onrender.com/api/user/players',
+      {
+        method: 'GET',
+        credentials: 'include',
+      },
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -158,14 +167,17 @@ export const fetchPlayers = async (
 
 export const addPlayer = async (player: SinglePlayer): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/admin/add/player', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://thesportos-v1.onrender.com/api/admin/add/player',
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(player),
       },
-      body: JSON.stringify(player),
-    });
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -191,7 +203,7 @@ export const updatePlayer = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/update/player/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/update/player/${id}`,
       {
         method: 'PUT',
         credentials: 'include',
@@ -223,7 +235,7 @@ export const updatePlayer = async (
 export const deletePlayer = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/player/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/delete/player/${id}`,
       {
         method: 'DELETE',
         credentials: 'include',
@@ -252,10 +264,13 @@ export const fetchBanner = async (
   setBanner: React.Dispatch<React.SetStateAction<Banner[]>>,
 ): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/user/banner', {
-      method: 'GET',
-      credentials: 'include',
-    });
+    const response = await fetch(
+      'https://thesportos-v1.onrender.com/api/user/banner',
+      {
+        method: 'GET',
+        credentials: 'include',
+      },
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -277,14 +292,17 @@ export const fetchBanner = async (
 
 export const addBanner = async (banner: Banner): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/admin/add/banner', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://thesportos-v1.onrender.com/api/admin/add/banner',
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(banner),
       },
-      body: JSON.stringify(banner),
-    });
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -310,7 +328,7 @@ export const updateBanner = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/update/banner/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/update/banner/${id}`,
       {
         method: 'PUT',
         credentials: 'include',
@@ -342,7 +360,7 @@ export const updateBanner = async (
 export const deleteBanner = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/banner/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/delete/banner/${id}`,
       {
         method: 'DELETE',
         credentials: 'include',
@@ -372,10 +390,13 @@ export const fetchSponsor = async (
   setSponsor: React.Dispatch<React.SetStateAction<Sponsor[]>>,
 ): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/user/sponsor', {
-      method: 'GET',
-      credentials: 'include',
-    });
+    const response = await fetch(
+      'https://thesportos-v1.onrender.com/api/user/sponsor',
+      {
+        method: 'GET',
+        credentials: 'include',
+      },
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -398,7 +419,7 @@ export const fetchSponsor = async (
 export const addSponsor = async (sponsor: Sponsor): Promise<void> => {
   try {
     const response = await fetch(
-      'http://localhost:4000/api/admin/add/sponsor',
+      'https://thesportos-v1.onrender.com/api/admin/add/sponsor',
       {
         method: 'POST',
         credentials: 'include',
@@ -433,7 +454,7 @@ export const updateSponsor = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/update/sponsor/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/update/sponsor/${id}`,
       {
         method: 'PUT',
         credentials: 'include',
@@ -465,7 +486,7 @@ export const updateSponsor = async (
 export const deleteSponsor = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/sponsor/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/delete/sponsor/${id}`,
       {
         method: 'DELETE',
         credentials: 'include',
@@ -495,10 +516,13 @@ export const fetchTrophies = async (
   setTrophies: React.Dispatch<React.SetStateAction<Trophy[]>>,
 ): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/user/trophies', {
-      method: 'GET',
-      credentials: 'include',
-    });
+    const response = await fetch(
+      'https://thesportos-v1.onrender.com/api/user/trophies',
+      {
+        method: 'GET',
+        credentials: 'include',
+      },
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -520,14 +544,17 @@ export const fetchTrophies = async (
 
 export const addTrophy = async (trophy: Trophy): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/admin/add/trophy', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://thesportos-v1.onrender.com/api/admin/add/trophy',
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(trophy),
       },
-      body: JSON.stringify(trophy),
-    });
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -553,7 +580,7 @@ export const updateTrophy = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/update/trophy/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/update/trophy/${id}`,
       {
         method: 'PUT',
         credentials: 'include',
@@ -585,7 +612,7 @@ export const updateTrophy = async (
 export const deleteTrophy = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/trophy/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/delete/trophy/${id}`,
       {
         method: 'DELETE',
         credentials: 'include',
@@ -616,7 +643,7 @@ export const fetchFeaturedPlayer = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      'http://localhost:4000/api/user/featured-player',
+      'https://thesportos-v1.onrender.com/api/user/featured-player',
       {
         method: 'GET',
         credentials: 'include',
@@ -646,7 +673,7 @@ export const addFeaturedPlayer = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      'http://localhost:4000/api/admin/add/featured-player',
+      'https://thesportos-v1.onrender.com/api/admin/add/featured-player',
       {
         method: 'POST',
         credentials: 'include',
@@ -681,7 +708,7 @@ export const updateFeaturedPlayer = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/update/featured-player/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/update/featured-player/${id}`,
       {
         method: 'PUT',
         credentials: 'include',
@@ -713,7 +740,7 @@ export const updateFeaturedPlayer = async (
 export const deleteFeaturedPlayer = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/featured-player/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/delete/featured-player/${id}`,
       {
         method: 'DELETE',
         credentials: 'include',
@@ -742,10 +769,13 @@ export const fetchLeague = async (
   setLeagues: React.Dispatch<React.SetStateAction<ILeague[]>>,
 ): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/user/leagues', {
-      method: 'GET',
-      credentials: 'include',
-    });
+    const response = await fetch(
+      'https://thesportos-v1.onrender.com/api/user/leagues',
+      {
+        method: 'GET',
+        credentials: 'include',
+      },
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -767,14 +797,17 @@ export const fetchLeague = async (
 
 export const addLeague = async (league: ILeague): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/admin/add/league', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://thesportos-v1.onrender.com/api/admin/add/league',
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(league),
       },
-      body: JSON.stringify(league),
-    });
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -800,7 +833,7 @@ export const updateLeague = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/update/league/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/update/league/${id}`,
       {
         method: 'PUT',
         credentials: 'include',
@@ -832,7 +865,7 @@ export const updateLeague = async (
 export const deleteLeague = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/league/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/delete/league/${id}`,
       {
         method: 'DELETE',
         credentials: 'include',
@@ -859,7 +892,7 @@ export const deleteLeague = async (id: string): Promise<void> => {
 export const deleteUserById = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/single/user/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/delete/single/user/${id}`,
       {
         method: 'DELETE',
         credentials: 'include',
@@ -888,10 +921,13 @@ export const fetchNews = async (
   setNews: React.Dispatch<React.SetStateAction<INews[]>>,
 ): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/user/blogs', {
-      method: 'GET',
-      credentials: 'include',
-    });
+    const response = await fetch(
+      'https://thesportos-v1.onrender.com/api/user/blogs',
+      {
+        method: 'GET',
+        credentials: 'include',
+      },
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -913,14 +949,17 @@ export const fetchNews = async (
 
 export const addNews = async (blog: INews): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/admin/add/blog', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://thesportos-v1.onrender.com/api/admin/add/blog',
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(blog),
       },
-      body: JSON.stringify(blog),
-    });
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -943,7 +982,7 @@ export const addNews = async (blog: INews): Promise<void> => {
 export const updateNews = async (id: string, blog: INews): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/update/blog/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/update/blog/${id}`,
       {
         method: 'PUT',
         credentials: 'include',
@@ -975,7 +1014,7 @@ export const updateNews = async (id: string, blog: INews): Promise<void> => {
 export const deleteNews = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/blog/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/delete/blog/${id}`,
       {
         method: 'DELETE',
         credentials: 'include',
@@ -1005,7 +1044,7 @@ export const fetchStarPerformers = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      'http://localhost:4000/api/user/star-performers',
+      'https://thesportos-v1.onrender.com/api/user/star-performers',
       {
         method: 'GET',
         credentials: 'include',
@@ -1035,7 +1074,7 @@ export const addStarPerformers = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      'http://localhost:4000/api/admin/add/star-performer',
+      'https://thesportos-v1.onrender.com/api/admin/add/star-performer',
       {
         method: 'POST',
         credentials: 'include',
@@ -1070,7 +1109,7 @@ export const updateStarPerformer = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/update/star-performer/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/update/star-performer/${id}`,
       {
         method: 'PUT',
         credentials: 'include',
@@ -1102,7 +1141,7 @@ export const updateStarPerformer = async (
 export const deleteStarPerformer = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/star-performer/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/delete/star-performer/${id}`,
       {
         method: 'DELETE',
         credentials: 'include',
@@ -1131,10 +1170,13 @@ export const fetchStandings = async (
   setStandings: React.Dispatch<React.SetStateAction<Standing[]>>,
 ): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:4000/api/user/standings', {
-      method: 'GET',
-      credentials: 'include',
-    });
+    const response = await fetch(
+      'https://thesportos-v1.onrender.com/api/user/standings',
+      {
+        method: 'GET',
+        credentials: 'include',
+      },
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -1157,7 +1199,7 @@ export const fetchStandings = async (
 export const addStanding = async (standing: Standing): Promise<void> => {
   try {
     const response = await fetch(
-      'http://localhost:4000/api/admin/add/standing',
+      'https://thesportos-v1.onrender.com/api/admin/add/standing',
       {
         method: 'POST',
         credentials: 'include',
@@ -1192,7 +1234,7 @@ export const updateStanding = async (
 ): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/update/standing/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/update/standing/${id}`,
       {
         method: 'PUT',
         credentials: 'include',
@@ -1224,7 +1266,7 @@ export const updateStanding = async (
 export const deleteStanding = async (id: string): Promise<void> => {
   try {
     const response = await fetch(
-      `http://localhost:4000/api/admin/delete/standing/${id}`,
+      `https://thesportos-v1.onrender.com/api/admin/delete/standing/${id}`,
       {
         method: 'DELETE',
         credentials: 'include',
