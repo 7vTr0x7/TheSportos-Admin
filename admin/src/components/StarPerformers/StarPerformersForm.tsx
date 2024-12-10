@@ -2,17 +2,7 @@ import React, { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { addStarPerformers, updateStarPerformer } from '../../apis/admin';
 import { useMatchContext } from '../MatchProvider';
-
-interface IStarPerformers {
-  _id?: string;
-  name: string;
-  imageUrl: string;
-  achievement: string;
-  tournament: string;
-  goals: number;
-  assists: number;
-  matches_played: number;
-}
+import { IStarPerformers } from '../../types/starPerformer';
 
 type StarPerformersFormProps = {
   closeForm: () => void;
@@ -28,6 +18,7 @@ const StarPerformerForm: React.FC<StarPerformersFormProps> = ({
   const [players, setPlayers] = useState<IStarPerformers[]>([
     {
       name: '',
+      rank: 0,
       imageUrl: '',
       achievement: '',
       tournament: '',
@@ -97,11 +88,9 @@ const StarPerformerForm: React.FC<StarPerformersFormProps> = ({
         ),
       );
 
-      // Update loading toast to success
       toast.success('File uploaded successfully!', { id: uploadToastId });
     } catch (error) {
       console.error('Error uploading file:', error);
-      // Update loading toast to error
       toast.error('File upload failed. Please try again.', {
         id: uploadToastId,
       });
@@ -156,6 +145,21 @@ const StarPerformerForm: React.FC<StarPerformersFormProps> = ({
             type="text"
             name="name"
             value={player.name}
+            onChange={(e) => handleInputChange(e, index)}
+            className="block w-full p-2 border border-gray-300 rounded"
+            placeholder="Enter player name"
+          />
+          <label
+            className="block mb-2 font-medium text-gray-700"
+            htmlFor="rank"
+          >
+            Player Rank:
+          </label>
+          <input
+            type="number"
+            name="rank"
+            id="rank"
+            value={player.rank}
             onChange={(e) => handleInputChange(e, index)}
             className="block w-full p-2 border border-gray-300 rounded"
             placeholder="Enter player name"

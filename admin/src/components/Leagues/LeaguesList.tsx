@@ -35,11 +35,15 @@ const LeagueList: React.FC = () => {
             className="px-4 py-2 rounded-lg bg-gray-200 mb-3 flex items-center justify-between"
             key={league._id}
           >
-            <img
-              alt={league._id}
-              src={league.logo_url}
-              className="h-20 w-20 rounded-md"
-            />
+            <div className="flex items-center gap-5">
+              <img
+                alt={league._id}
+                src={league.logo_url}
+                className="h-14 w-14 rounded-md"
+              />
+
+              <p>{league.league}</p>
+            </div>
 
             <div className="flex items-center gap-5 ">
               <button onClick={() => setOpenFormId(league._id)}>Edit</button>

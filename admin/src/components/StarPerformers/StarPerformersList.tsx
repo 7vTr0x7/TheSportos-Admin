@@ -30,16 +30,18 @@ const StarPerformersList: React.FC = () => {
   return (
     <div className="mt-4">
       {starPerformers &&
+        starPerformers.sort((a, b) => a.rank - b.rank) &&
         starPerformers.map((player, index) => (
           <div
             className="px-4 py-2 rounded-lg bg-gray-200 mb-3 flex items-center justify-between"
             key={player._id}
           >
             <div className="flex items-center gap-5">
+              <p>{player?.rank}.</p>
               <img
                 alt={player._id}
                 src={player.imageUrl}
-                className="h-16 w-16 rounded-md"
+                className="h-12 w-12 rounded-full"
               />
 
               <p>{player.name}</p>
