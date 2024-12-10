@@ -103,14 +103,21 @@ const TeamLineupFieldset: React.FC<TeamLineupFieldsetProps> = ({
           {/* Player Position */}
           <label>
             Position:
-            <input
-              type="text"
+            <select
               value={player.position}
               onChange={(e) =>
                 handlePlayerChange(team, index, 'position', e.target.value)
               }
               className="w-full border p-2"
-            />
+            >
+              <option value="" disabled>
+                Select Position
+              </option>
+              <option value="Forward">Forward</option>
+              <option value="Defender">Defender</option>
+              <option value="Midfielder">Midfielder</option>
+              <option value="Goalkeeper">Goalkeeper</option>
+            </select>
           </label>
 
           {/* Image Selection */}

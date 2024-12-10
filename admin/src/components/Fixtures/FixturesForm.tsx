@@ -876,15 +876,23 @@ const FixturesForm: React.FC<FixturesFormProps> = ({
                   </label>
                   <label className="block">
                     Position:
-                    <input
-                      type="text"
+                    <select
                       value={formState.featuredPlayer?.position || ''}
                       onChange={(e) =>
                         handleFeaturedPlayerChange('position', e.target.value)
                       }
                       className="w-full border p-2"
-                    />
+                    >
+                      <option value="" disabled>
+                        Select Position
+                      </option>
+                      <option value="Forward">Forward</option>
+                      <option value="Defender">Defender</option>
+                      <option value="Midfielder">Midfielder</option>
+                      <option value="Goalkeeper">Goalkeeper</option>
+                    </select>
                   </label>
+
                   <div className="grid grid-cols-3 max-w-[80%]">
                     <label>
                       Goals:
