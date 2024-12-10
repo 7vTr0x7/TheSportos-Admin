@@ -6,6 +6,7 @@ import TrophyForm from './TrophyForm';
 
 const TrophiesList: React.FC = () => {
   const [openFormId, setOpenFormId] = useState<string | null>(null);
+  const [isDeleting, setIsDeleting] = useState<string | null>(null);
   const { trophies, refreshTrophies } = useMatchContext();
 
   useEffect(() => {
@@ -14,16 +15,19 @@ const TrophiesList: React.FC = () => {
 
   const deleteHandler = async (id: string) => {
     const deleteToast = toast.loading('Deleting trophy...');
+    setIsDeleting(id);
     try {
       await deleteTrophy(id);
       refreshTrophies();
       toast.success('Trophy deleted successfully!', {
         id: deleteToast,
       });
-    } catch (error) {
-      toast.error('Failed to delete trophy.', {
+    } catch (error: any) {
+      toast.error(error?.message || 'Failed to delete trophy.', {
         id: deleteToast,
       });
+    } finally {
+      setIsDeleting(null);
     }
   };
 
@@ -36,17 +40,29 @@ const TrophiesList: React.FC = () => {
             key={trophy._id}
           >
             <img
-              alt={trophy._id}
+              alt={`Trophy ${trophy.name}`}
               src={trophy.image_url}
               className="h-20 w-20 rounded-md"
             />
 
-            <div className="flex items-center gap-5 ">
-              <button onClick={() => setOpenFormId(trophy._id as string)}>
+            <div className="flex items-center gap-5">
+              <button
+                onClick={() => setOpenFormId(trophy._id as string)}
+                disabled={isDeleting === trophy._id}
+                className="text-blue-500 hover:underline"
+              >
                 Edit
               </button>
-              <button onClick={() => deleteHandler(trophy._id as string)}>
-                Delete
+              <button
+                onClick={() => deleteHandler(trophy._id as string)}
+                disabled={isDeleting === trophy._id}
+                className={`text-red-500 hover:underline ${
+                  isDeleting === trophy._id
+                    ? 'opacity-50 cursor-not-allowed'
+                    : ''
+                }`}
+              >
+                {isDeleting === trophy._id ? 'Deleting...' : 'Delete'}
               </button>
             </div>
 
@@ -54,6 +70,9 @@ const TrophiesList: React.FC = () => {
               <div
                 className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
                 onClick={() => setOpenFormId(null)}
+                aria-labelledby="edit-trophy-modal"
+                role="dialog"
+                aria-modal="true"
               >
                 <div
                   className="bg-white w-full max-w-lg mx-auto p-4 rounded-lg shadow-lg"

@@ -4,16 +4,22 @@ import {
   fetchFeaturedPlayer,
   fetchLeague,
   fetchMatches,
+  fetchNews,
   fetchPlayers,
   fetchSponsor,
+  fetchStandings,
+  fetchStarPerformers,
   fetchTrophies,
 } from '../apis/admin';
-import { SinglePlayer } from '../types/player';
 import { Banner } from '../types/banner';
-import { Sponsor } from '../types/sponsor';
-import { Trophy } from '../types/trophy';
 import { FeaturedPlayer, Match } from '../types/fixture';
 import { ILeague } from '../types/league';
+import { INews } from '../types/news';
+import { SinglePlayer } from '../types/player';
+import { Sponsor } from '../types/sponsor';
+import { IStarPerformers } from '../types/starPerformer';
+import { Trophy } from '../types/trophy';
+import { Standing } from '../types/standing';
 
 type MatchContextType = {
   liveMatches: Match[];
@@ -25,6 +31,9 @@ type MatchContextType = {
   trophies: Trophy[];
   featuredPlayer: FeaturedPlayer[];
   leagues: ILeague[];
+  news: INews[];
+  starPerformers: IStarPerformers[];
+  standings: Standing[];
   refreshMatches: () => void;
   refreshPlayers: () => void;
   refreshBanner: () => void;
@@ -32,6 +41,9 @@ type MatchContextType = {
   refreshTrophies: () => void;
   refreshFeaturedPlayer: () => void;
   refreshLeagues: () => void;
+  refreshNews: () => void;
+  refreshStarPerformers: () => void;
+  refreshStandings: () => void;
 };
 
 const MatchContext = createContext<MatchContextType | undefined>(undefined);
@@ -42,49 +54,55 @@ export const MatchProvider: React.FC<{ children: React.ReactNode }> = ({
   const [liveMatches, setLiveMatches] = useState<Match[]>([]);
   const [scheduledMatches, setScheduledMatches] = useState<Match[]>([]);
   const [completedMatches, setCompletedMatches] = useState<Match[]>([]);
-
   const [players, setPlayers] = useState<SinglePlayer[]>([]);
   const [featuredPlayer, setFeaturedPlayer] = useState<FeaturedPlayer[]>([]);
   const [banner, setBanner] = useState<Banner[]>([]);
   const [sponsor, setSponsor] = useState<Sponsor[]>([]);
   const [trophies, setTrophies] = useState<Trophy[]>([]);
   const [leagues, setLeagues] = useState<ILeague[]>([]);
-
-  const [refreshKey, setRefreshKey] = useState(0); // Track refresh trigger
+  const [news, setNews] = useState<INews[]>([]);
+  const [starPerformers, setStarPerformers] = useState<IStarPerformers[]>([]);
+  const [standings, setStandings] = useState<Standing[]>([]);
 
   const refreshMatches = useCallback(() => {
     fetchMatches(setLiveMatches, 'Live');
     fetchMatches(setScheduledMatches, 'Upcoming');
     fetchMatches(setCompletedMatches, 'Completed');
-    setRefreshKey((key) => key + 1); // Increment key to force refresh
   }, []);
 
   const refreshPlayers = useCallback(() => {
     fetchPlayers(setPlayers);
-    setRefreshKey((key) => key + 1); // Increment key to force refresh
   }, []);
 
   const refreshBanner = useCallback(() => {
     fetchBanner(setBanner);
-    setRefreshKey((key) => key + 1); // Increment key to force refresh
   }, []);
+
   const refreshSponsor = useCallback(() => {
     fetchSponsor(setSponsor);
-    setRefreshKey((key) => key + 1); // Increment key to force refresh
   }, []);
 
   const refreshTrophies = useCallback(() => {
     fetchTrophies(setTrophies);
-    setRefreshKey((key) => key + 1); // Increment key to force refresh
   }, []);
 
   const refreshFeaturedPlayer = useCallback(() => {
     fetchFeaturedPlayer(setFeaturedPlayer);
-    setRefreshKey((key) => key + 1); // Increment key to force refresh
   }, []);
+
   const refreshLeagues = useCallback(() => {
     fetchLeague(setLeagues);
-    setRefreshKey((key) => key + 1); // Increment key to force refresh
+  }, []);
+
+  const refreshNews = useCallback(() => {
+    fetchNews(setNews);
+  }, []);
+
+  const refreshStarPerformers = useCallback(() => {
+    fetchStarPerformers(setStarPerformers);
+  }, []);
+  const refreshStandings = useCallback(() => {
+    fetchStandings(setStandings);
   }, []);
 
   return (
@@ -99,6 +117,9 @@ export const MatchProvider: React.FC<{ children: React.ReactNode }> = ({
         trophies,
         featuredPlayer,
         leagues,
+        news,
+        starPerformers,
+        standings,
         refreshPlayers,
         refreshMatches,
         refreshBanner,
@@ -106,6 +127,9 @@ export const MatchProvider: React.FC<{ children: React.ReactNode }> = ({
         refreshTrophies,
         refreshFeaturedPlayer,
         refreshLeagues,
+        refreshNews,
+        refreshStarPerformers,
+        refreshStandings,
       }}
     >
       {children}

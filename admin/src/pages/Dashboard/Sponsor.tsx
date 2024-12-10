@@ -8,7 +8,7 @@ const Sponsor: React.FC = () => {
     <>
       <Breadcrumb pageName="Sponsor" />
 
-      <AddSponsor />
+      {/* <AddSponsor /> */}
 
       <SponsorList />
     </>

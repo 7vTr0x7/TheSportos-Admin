@@ -3,16 +3,17 @@ import { deleteMatch } from '../../apis/admin';
 import { useMatchContext } from '../MatchProvider';
 import toast from 'react-hot-toast';
 import FixturesForm from './FixturesForm';
+import { Match } from '../../types/fixture';
 
 type Matches = {
   matches: Match[];
 };
 
 const MatchList: React.FC<Matches> = ({ matches }) => {
-  const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
+  const [selectedMatchId, setSelectedMatchId] = useState<string | null>(null);
 
   const closeForm = () => {
-    setIsFormOpen(false);
+    setSelectedMatchId(null);
   };
 
   const { refreshMatches } = useMatchContext();
@@ -40,16 +41,18 @@ const MatchList: React.FC<Matches> = ({ matches }) => {
             key={match._id}
             className="flex items-center justify-between rounded-md bg-gray-200 px-5 py-2 mb-3"
           >
-            <div className="flex items-center gap-5 ">
+            <div className="flex items-center gap-5">
               <div>{match.team1.name}</div>
               <p>vs</p>
               <div>{match.team2.name}</div>
             </div>
-            <div className="flex items-center gap-5 ">
-              <button onClick={() => setIsFormOpen(true)}>Edit</button>
+            <div className="flex items-center gap-5">
+              <button onClick={() => setSelectedMatchId(match._id)}>
+                Edit
+              </button>
               <button onClick={() => deleteHandler(match._id)}>Delete</button>
             </div>
-            {isFormOpen && (
+            {selectedMatchId === match._id && (
               <div
                 className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
                 onClick={closeForm}
@@ -69,7 +72,7 @@ const MatchList: React.FC<Matches> = ({ matches }) => {
           </div>
         ))
       ) : (
-        <p>Match Found</p>
+        <p>No Matches Found</p>
       )}
     </div>
   );

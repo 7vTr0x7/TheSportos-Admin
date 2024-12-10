@@ -8,7 +8,7 @@ const Banner: React.FC = () => {
     <>
       <Breadcrumb pageName="Banner" />
 
-      <AddBanner />
+      {/* <AddBanner /> */}
 
       <BannerList />
     </>

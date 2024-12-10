@@ -33,6 +33,7 @@ const PlayerForm: React.FC<PlayerFormProps> = ({
     recentFixtures: [],
   });
 
+  console.log(player);
   const { refreshPlayers } = useMatchContext();
 
   useEffect(() => {

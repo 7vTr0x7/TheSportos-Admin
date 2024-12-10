@@ -18,6 +18,8 @@ import Banner from './pages/Dashboard/Banner';
 import Sponsor from './pages/Dashboard/Sponsor';
 import Trophies from './pages/Dashboard/Trophies';
 import FeaturedPlayer from './pages/Dashboard/FeaturedPlayer';
+import StarPerformers from './pages/Dashboard/StarPerformers';
+import Standings from './pages/Dashboard/Standings';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -92,11 +94,29 @@ function App() {
               }
             />
             <Route
+              path="/star-performers"
+              element={
+                <>
+                  <PageTitle title="Star Performers" />
+                  <StarPerformers />
+                </>
+              }
+            />
+            <Route
               path="/players"
               element={
                 <>
                   <PageTitle title="Players" />
                   <Players />
+                </>
+              }
+            />
+            <Route
+              path="/standings"
+              element={
+                <>
+                  <PageTitle title="Standings" />
+                  <Standings />
                 </>
               }
             />

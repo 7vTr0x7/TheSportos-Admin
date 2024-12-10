@@ -9,11 +9,12 @@ interface PlayersListProps {
 }
 
 const PlayersList: React.FC<PlayersListProps> = ({ position }) => {
-  const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
+  const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
 
   const closeForm = () => {
-    setIsFormOpen(false);
+    setSelectedPlayerId(null);
   };
+
   const { players, refreshPlayers } = useMatchContext();
 
   useEffect(() => {
@@ -57,12 +58,14 @@ const PlayersList: React.FC<PlayersListProps> = ({ position }) => {
               />
               <p className="text-black">{player.name}</p>
             </div>
-            <div className="flex items-center gap-5 ">
-              <button onClick={() => setIsFormOpen(true)}>Edit</button>
+            <div className="flex items-center gap-5">
+              <button onClick={() => setSelectedPlayerId(player._id)}>
+                Edit
+              </button>
               <button onClick={() => deleteHandler(player._id)}>Delete</button>
             </div>
 
-            {isFormOpen && (
+            {selectedPlayerId === player._id && (
               <div
                 className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
                 onClick={closeForm}
