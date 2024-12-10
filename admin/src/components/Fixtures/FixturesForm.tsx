@@ -141,61 +141,55 @@ const FixturesForm: React.FC<FixturesFormProps> = ({
     }
   };
 
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
-    const { name, value, type } = event.target;
+const handleInputChange = (
+  event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+) => {
+  const { name, value, type, checked } = event.target;
 
-    setFormState((prevState) => {
-      if (name.includes('.')) {
-        const [parentKey, childKey, subKey] = name.split('.');
-
-        if (subKey) {
-          // Three-level nesting
+  setFormState((prevState) => {
+    if (name.includes('.')) {
+      // Handle nested updates for dot-separated keys
+      const keys = name.split('.');
+      const updateNestedObject = (obj: any, keys: string[], value: any) => {
+        const [currentKey, ...remainingKeys] = keys;
+        if (remainingKeys.length === 0) {
           return {
-            ...prevState,
-            [parentKey]: {
-              ...(prevState[parentKey] as object),
-              [childKey]: {
-                ...(prevState[parentKey][childKey] as object),
-                [subKey]:
-                  type === 'checkbox'
-                    ? (event.target as HTMLInputElement).checked
-                    : value,
-              },
-            },
-          };
-        } else {
-          // Two-level nesting
-          return {
-            ...prevState,
-            [parentKey]: {
-              ...(prevState[parentKey] as object),
-              [childKey]:
-                type === 'checkbox'
-                  ? (event.target as HTMLInputElement).checked
-                  : value,
-            },
+            ...obj,
+            [currentKey]: type === 'checkbox' ? checked : value,
           };
         }
-      } else if (name === 'daysLeft' || name === 'hoursLeft') {
-        // Handle `timeLeft` updates
         return {
-          ...prevState,
-          timeLeft: {
-            ...prevState.timeLeft,
-            [name]: value,
-          },
+          ...obj,
+          [currentKey]: updateNestedObject(
+            obj[currentKey] || {},
+            remainingKeys,
+            value,
+          ),
         };
-      } else {
-        // Single-level updates
-        return {
-          ...prevState,
-          [name]: value,
-        };
-      }
-    });
-  };
+      };
+      return updateNestedObject(
+        prevState,
+        keys,
+        type === 'checkbox' ? checked : value,
+      );
+    } else if (name === 'daysLeft' || name === 'hoursLeft') {
+      // Handle `timeLeft` updates and ensure numeric values
+      return {
+        ...prevState,
+        timeLeft: {
+          ...prevState.timeLeft,
+          [name]: Number(value),
+        },
+      };
+    } else {
+      // Handle flat updates
+      return {
+        ...prevState,
+        [name]: type === 'checkbox' ? checked : value,
+      };
+    }
+  });
+};
 
   const handleGoalChange = (
     team: 'team1' | 'team2',
